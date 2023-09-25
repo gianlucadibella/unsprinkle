@@ -4,8 +4,20 @@ import styled from 'styled-components/macro';
 const Hero = () => {
   return (
     <Wrapper>
-      <HeroImage src="/images/hero-img.jpg" />
-      <Swoop src="/swoop.svg" />
+      <picture>
+        <source srcSet={`
+        /images/hero-img.avif 1x,
+        /images/hero-img@2x.avif 2x,
+        /images/hero-img@3x.avif 3x,
+        `}/>
+        <source srcSet={`
+        /images/hero-img.jpg 1x,
+        /images/hero-img@2x.jpg 2x,
+        /images/hero-img@3x.jpg 3x,
+        `}/>
+      <HeroImage src="/images/hero-img.avif" alt={'An example of the photos shown in this site (cat on black background)'}/>
+      </picture>
+      <Swoop src="/swoop.svg" alt={``}/>
     </Wrapper>
   );
 };
@@ -25,6 +37,22 @@ const HeroImage = styled.img`
   width: 500px;
   height: 500px;
   max-height: 100%;
+
+  @media
+    (-webkit--min-device-pixel-ratio: 2),
+    (min-resolution: 2dppx) 
+    {
+      background-image: url('/images/hero-img@2x.avif')
+    }
+  
+    @media
+    (-webkit--min-device-pixel-ratio: 3),
+    (min-resolution: 3dppx) 
+    {
+      background-image: url('/images/hero-img@3x.avif')
+    }
+
+
 `;
 
 const Swoop = styled.img`
